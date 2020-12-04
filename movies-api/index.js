@@ -1,6 +1,7 @@
 import './db';
 import {loadUsers} from './seedData';
 import usersRouter from './api/users';
+import genresRouter from './api/genres'
 import dotenv from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';
@@ -22,13 +23,14 @@ const app = express();
 //configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use('/api/movies', moviesRouter);
-app.use('/api/users', usersRouter);
-app.use(errHandler);
 
 const port = process.env.PORT;
 
 app.use(express.static('public'));
+app.use('/api/movies', moviesRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/genres', genresRouter);
+app.use(errHandler);
 
 if (process.env.SEED_DB) {
   loadUsers();
