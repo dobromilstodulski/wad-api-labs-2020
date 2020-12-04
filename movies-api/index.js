@@ -22,13 +22,13 @@ const app = express();
 //configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use('/api/movies', moviesRouter);
+app.use('/api/users', usersRouter);
+app.use(errHandler);
 
 const port = process.env.PORT;
 
 app.use(express.static('public'));
-app.use('/api/movies', moviesRouter);
-app.use('/api/users', usersRouter);
-app.use(errHandler);
 
 if (process.env.SEED_DB) {
   loadUsers();
