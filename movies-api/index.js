@@ -1,7 +1,7 @@
 import './db';
 import session from 'express-session';
 import passport from './authenticate';
-import {loadUsers} from './seedData';
+import {loadUsers, loadMovies} from './seedData';
 import usersRouter from './api/users';
 import genresRouter from './api/genres';
 import dotenv from 'dotenv';
@@ -17,6 +17,7 @@ const port = process.env.PORT;
 
 if (process.env.SEED_DB) {
   loadUsers();
+  loadMovies();
 }
 
 const errHandler = (err, req, res) => {
